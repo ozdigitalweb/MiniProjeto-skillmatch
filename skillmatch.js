@@ -524,3 +524,25 @@ async function iniciarSistema() {
 
     console.log("-".repeat(52));
   });
+
+  // RF06 - melhor vaga via reduce
+  const melhor = encontrarMelhorVaga(resultados);
+  console.log("\n  VAGA MAIS COMPATIVEL COM SEU PERFIL");
+  console.log("-".repeat(52));
+  console.log(`Empresa: ${melhor.empresa}`);
+  console.log(`Cargo: ${melhor.cargo}`);
+  console.log(`Compatibilidade: ${melhor.percentual}% - ${melhor.classificacao}`);
+
+  // RF07 - recomendacao de estudo
+  console.log("\n" + "-".repeat(52));
+  console.log("  PLANO DE ESTUDOS RECOMENDADO");
+  console.log("-".repeat(52));
+  console.log(gerarRecomendacao(resultados));
+
+  // RF12 - callback
+  finalizarAnalise(candidato.nome, mensagemFinal);
+  console.log("\n" + "=".repeat(52));
+}
+
+// Inicia o sistema
+iniciarSistema();
