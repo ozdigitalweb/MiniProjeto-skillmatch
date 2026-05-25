@@ -326,3 +326,66 @@ const encontrarMelhorVaga = (resultados) =>
   resultados.reduce((melhor, atual) =>
     atual.percentual > melhor.percentual ? atual : melhor
   );
+
+  
+// ============================================================
+// RF07 - GERAR RECOMENDACAO DE ESTUDO
+// ============================================================
+
+/**
+ * Coleta todas as habilidades faltantes, remove duplicatas
+ * e gera uma mensagem de recomendacao de estudo.
+ *
+ * RF08 - reduce: junta todos os arrays de faltantes em um so.
+ * RF08 - filter: remove duplicatas com indexOf.
+ *
+ * @param   {object[]} resultados
+ * @returns {string}
+ */
+const gerarRecomendacao = (resultados) => {
+  const todas  = resultados.reduce((acc, r) => acc.concat(r.faltantes), []);
+  const unicas = todas.filter((h, i) => todas.indexOf(h) === i);
+
+  if (unicas.length === 0) {
+    return "Parabens! Voce atende todos os requisitos das vagas!";
+  }
+
+  return (
+    "Recomendacao de estudo:\n" +
+    `   Priorize: ${unicas.join(", ")}.\n` +
+    "   Esses conteudos aparecem nas vagas analisadas."
+  );
+};
+
+
+// ============================================================
+// RF08 - METODOS DE ARRAY (map + find)
+// ============================================================
+
+/**
+ * Gera os resultados de todas as vagas usando MAP.
+ * Demonstra o uso de FIND para buscar uma vaga especifica.
+ *
+ * map:  transforma cada vaga em seu objeto de resultado.
+ * find: retorna o primeiro item que passa no teste.
+ *
+ * @param   {object}   candidato
+ * @param   {Vaga[]}   vagas
+ * @returns {object[]}
+ */
+const gerarTodosResultados = (candidato, vagas) => {
+  // map: percorre cada vaga e devolve um array de resultados
+  const resultados = vagas.map(vaga => {
+    const resultado = calcularCompatibilidade(candidato, vaga);
+    resultado.classificacao = classificarCompatibilidade(resultado.percentual);
+    return resultado;
+  });
+
+  // find: busca a primeira vaga com salario acima de R$2500
+  const vagaDestaque = vagas.find(v => v.salario > 2500);
+  if (vagaDestaque) {
+    console.log(`[find] Primeira vaga com salario acima de R$2500: ${vagaDestaque.exibirResumo()}\n`);
+  }
+
+  return resultados;
+};
