@@ -205,3 +205,80 @@ const vagas = [
     2200, "Remoto", "Trainee"
   ),
 ];
+
+
+// ============================================================
+// RF03 - CALCULAR COMPATIBILIDADE COM CADA VAGA
+// ============================================================
+
+/**
+ * Compara as habilidades do candidato com os requisitos da vaga.
+ *
+ * ARROW FUNCTION: const nome = (params) => { corpo }
+ * OPERADORES: / divisao, * multiplicacao, Math.round()
+ *
+ * @param   {object} candidato
+ * @param   {Vaga}   vaga
+ * @returns {object} resultado da analise
+ */
+const calcularCompatibilidade = (candidato, vaga) => {
+
+  // RF08 - filter: retorna requisitos que o candidato JA TEM
+  const encontradas = vaga.requisitos.filter(req =>
+    candidato.habilidades.includes(req)
+  );
+
+  // RF08 - filter: retorna requisitos que o candidato NAO TEM
+  const faltantes = vaga.requisitos.filter(req =>
+    !candidato.habilidades.includes(req)
+  );
+
+  // RF08 - every: true somente se TODOS os requisitos sao atendidos
+  const atendeTudo = vaga.requisitos.every(req =>
+    candidato.habilidades.includes(req)
+  );
+
+  // Calculo do percentual: encontradas / total * 100
+  const percentual = Math.round(
+    (encontradas.length / vaga.requisitos.length) * 100
+  );
+
+  return {
+    empresa:    vaga.empresa,
+    cargo:      vaga.cargo,
+    resumo:     vaga.exibirResumo(),
+    nivel:      vaga.exibirNivel(),
+    salario:    vaga.salario,
+    modalidade: vaga.modalidade,
+    percentual,
+    encontradas,
+    faltantes,
+    atendeTudo,
+  };
+};
+
+
+// ============================================================
+// RF04 - CLASSIFICAR A COMPATIBILIDADE
+// ============================================================
+
+/**
+ * Classifica o percentual em Alta, Media ou Baixa.
+ *
+ * IF/ELSE: avalia condicoes de cima para baixo e para
+ * na primeira verdadeira.
+ *
+ * Tabela:
+ *   80% a 100% -> Alta compatibilidade
+ *   50% a 79%  -> Media compatibilidade
+ *    0% a 49%  -> Baixa compatibilidade
+ *
+ * @param   {number} percentual
+ * @returns {string}
+ */
+const classificarCompatibilidade = (percentual) => {
+  if (percentual >= 80)      return "Alta compatibilidade";
+  else if (percentual >= 50) return "Media compatibilidade";
+  else                       return "Baixa compatibilidade";
+};
+
