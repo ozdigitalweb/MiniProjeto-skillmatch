@@ -1,5 +1,5 @@
-// SKILLMATCH JS
-// SENAI SC - Modulo 01 - Mini Projeto
+// MINI PROJETO SKILLMATCH JS
+// SENAI SC - Modulo 01 - Mini Projeto JavaScript
 // Nome do Aluno: Marcelo Krauthein Correa
 // Turma: Curso SENAI T1 - Desenvolvedor Front-End React
 // Simulador de Compatibilidade com Vagas Front-End Junior
@@ -34,19 +34,31 @@
 // antes de usá-la com new.
 
 // Reorganizei os modulos para que o fluxo saisse mais de acordo com a proposta do projeto.
-// A ordem ficou assim:
-// RF01  → objeto candidata
-// RF09  → class Vaga
-// RF10  → class VagaFrontEnd extends Vaga
-// RF02  → array de vagas
-// RF03  → calcularCompatibilidade()
-// RF04  → classificarCompatibilidade()
-// RF05  → listarHabilidadesFaltantes()
-// RF06  → encontrarMelhorVaga()
-// RF07  → gerarRecomendacao()
-// RF08  → gerarTodosResultados() com map, filter, find, every, reduce
-// RF12  → finalizarAnalise() com callback
-// RF13  → criarContadorDeAnalises() com closure
-// RF14  → buscarVagasSimuladas() com Promise + iniciarSistema() com async/await
-// ------------------------------------------------------------
 
+// O PDF pede essa ordem:
+// RF01 → candidata
+// RF02 → array de vagas
+// -------------------
+// -------------------
+// RF09 → class Vaga
+// RF10 → class VagaFrontEnd
+// Mas se seguíssemos essa ordem no código, ele quebraria. Por quê?
+//
+// O problema está no RF02.
+// O array de vagas usa new VagaFrontEnd(...) para criar cada objeto:
+// jsconst vagas = [
+// new VagaFrontEnd("TechStart", ...), // ← precisa que VagaFrontEnd exista
+// new VagaFrontEnd("CodeLab",   ...),
+// O JavaScript lê o arquivo de cima para baixo, linha por linha. 
+// Quando ele chega nessa linha e encontra new VagaFrontEnd, ele 
+// procura pela classe na memória. Se a classe ainda não foi declarada, 
+// ele trava com este erro: ReferenceError: Cannot access 'VagaFrontEnd' before initialization
+
+// -- A solução foi inverter RF09 e RF10 com RF02:
+// RF01 → candidata          (não depende de nada)
+// RF09 → class Vaga         (não depende de nada)
+// RF10 → class VagaFrontEnd (depende de Vaga)
+// RF02 → array de vagas     (depende de VagaFrontEnd)
+// Assim, quando o JavaScript chega no RF02 e executa o 
+// new VagaFrontEnd(...), a classe já existe na memória e 
+// funciona perfeitamente.
