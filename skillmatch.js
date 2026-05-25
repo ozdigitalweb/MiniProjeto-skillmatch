@@ -447,3 +447,51 @@ function criarContadorDeAnalises() {
 }
 
 const contarAnalise = criarContadorDeAnalises();
+
+// ============================================================
+// RF14 - PROMISE E ASYNC/AWAIT
+// ============================================================
+
+/**
+ * Simula a busca de vagas em um servidor remoto.
+ *
+ * PROMISE: operacao que ocorre no futuro.
+ * setTimeout simula 1 segundo de espera de uma API real.
+ * Demonstra a arquitetura CLIENTE-SERVIDOR.
+ *
+ * @returns {Promise<VagaFrontEnd[]>}
+ */
+function buscarVagasSimuladas() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(vagas);
+    }, 1000);
+  });
+}
+
+/**
+ * Funcao principal que orquestra todo o sistema.
+ *
+ * ASYNC: declara a funcao como assincrona.
+ * AWAIT: pausa a execucao ate a Promise resolver.
+ */
+async function iniciarSistema() {
+
+  console.log("=".repeat(52));
+  console.log("  SKILLMATCH JS - SENAI SC Front-End");
+  console.log("  Simulador de Compatibilidade com Vagas");
+  console.log("=".repeat(52));
+
+  // Dados do candidato (RF01)
+  console.log(`\nCandidato:    ${candidato.nome}`);
+  console.log(`Area:          ${candidato.area}`);
+  console.log(`Experiencia:   ${candidato.experienciaMeses} meses`);
+  console.log(`Habilidades:   ${candidato.habilidades.join(", ")}\n`);
+
+  console.log("Conectando ao banco de vagas...");
+
+  // RF14 - await espera a Promise antes de continuar
+  const vagasCarregadas = await buscarVagasSimuladas();
+  console.log(`${vagasCarregadas.length} vagas carregadas!\n`);
+
+  
