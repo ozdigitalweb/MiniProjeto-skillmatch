@@ -62,3 +62,146 @@
 // Assim, quando o JavaScript chega no RF02 e executa o 
 // new VagaFrontEnd(...), a classe já existe na memória e 
 // funciona perfeitamente.
+
+
+// ============================================================
+// RF01 - PERFIL DO CANDIDATO
+// ============================================================
+
+/**
+ * Objeto que representa o perfil do candidato.
+ *
+ * OBJETO: estrutura que agrupa dados no formato chave: valor.
+ *
+ * TIPOS DE DADOS:
+ *   string -> nome, area
+ *   array  -> habilidades (lista de strings)
+ *   number -> experienciaMeses
+ *
+ * "const": a variavel nao pode apontar para outro objeto,
+ * mas suas propriedades podem ser lidas normalmente.
+ */
+
+const candidato = {
+  nome:             "Ana Silva",
+  area:             "Front-End",
+  habilidades:      [
+    "JavaScript",
+    "GitHub",
+    "Logica de Programacao",
+    "Kanban",
+    "Arrow Functions",
+  ],
+  experienciaMeses: 3,
+};
+
+
+// ============================================================
+// RF09 - CLASSE VAGA (definida antes do RF02 por dependencia)
+// ============================================================
+
+/**
+ * Classe base que representa uma vaga de emprego.
+ *
+ * CLASSE: molde para criar objetos.
+ * CONSTRUCTOR: chamado automaticamente ao usar "new".
+ * THIS: representa o proprio objeto sendo criado.
+ */
+class Vaga {
+  /**
+   * @param {string}   empresa
+   * @param {string}   cargo
+   * @param {string[]} requisitos
+   * @param {number}   salario
+   * @param {string}   modalidade
+   */
+  constructor(empresa, cargo, requisitos, salario, modalidade) {
+    // RF11 - USO DO THIS
+    this.empresa    = empresa;
+    this.cargo      = cargo;
+    this.requisitos = requisitos;
+    this.salario    = salario;
+    this.modalidade = modalidade;
+  }
+
+  /**
+   * Metodo que usa "this" para retornar um resumo da vaga.
+   * @returns {string}
+   */
+  exibirResumo() {
+    return `${this.cargo} na ${this.empresa}`;
+  }
+}
+
+
+// ============================================================
+// RF10 - HERANCA: VagaFrontEnd extends Vaga
+// ============================================================
+
+/**
+ * Classe filha que herda de Vaga e adiciona o campo "nivel".
+ *
+ * HERANCA: a classe filha recebe automaticamente tudo da pai.
+ * "extends" declara a heranca.
+ * "super()" chama o constructor da classe pai.
+ */
+class VagaFrontEnd extends Vaga {
+  /**
+   * @param {string}   empresa
+   * @param {string}   cargo
+   * @param {string[]} requisitos
+   * @param {number}   salario
+   * @param {string}   modalidade
+   * @param {string}   nivel
+   */
+  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);
+    // RF11 - atributo exclusivo da classe filha
+    this.nivel = nivel;
+  }
+
+  /**
+   * @returns {string}
+   */
+  exibirNivel() {
+    return `Nivel: ${this.nivel}`;
+  }
+}
+
+
+// ============================================================
+// RF02 - LISTA DE VAGAS
+// ============================================================
+
+/**
+ * Array com as vagas disponiveis para analise.
+ * Cada item e uma instancia de VagaFrontEnd criada com "new".
+ *
+ * ARRAY: lista ordenada entre colchetes [].
+ */
+const vagas = [
+  new VagaFrontEnd(
+    "TechStart",
+    "Desenvolvedor Front-End Junior",
+    ["JavaScript", "GitHub", "Logica de Programacao"],
+    2800, "Remoto", "Junior"
+  ),
+  new VagaFrontEnd(
+    "CodeLab",
+    "Estagio Front-End",
+    ["JavaScript", "Kanban", "GitHub"],
+    1800, "Hibrido", "Estagio"
+  ),
+  new VagaFrontEnd(
+    "WebSolutions",
+    "Programador JavaScript Junior",
+    ["JavaScript", "Arrow Functions", "Objetos", "Funcoes"],
+    3000, "Presencial", "Junior"
+  ),
+  new VagaFrontEnd(
+    "DevHouse",
+    "Trainee Front-End",
+    ["JavaScript", "GitHub", "Kanban", "Logica de Programacao", "Arrow Functions"],
+    2200, "Remoto", "Trainee"
+  ),
+];
