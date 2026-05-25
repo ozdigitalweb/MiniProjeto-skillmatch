@@ -1,4 +1,4 @@
-O SkillMatch JS
+# SkillMatch JS
 
 > Simulador de Compatibilidade com Vagas Front-End Júnior
 
@@ -91,6 +91,10 @@ No projeto, a função `buscarVagasSimuladas()` imita esse comportamento usando 
 - **Color Picker** – seleciona cores visualmente
 - **vscode-pdf** – visualiza arquivos PDF dentro do VS Code
 - **Codex (OpenAI)** – assistente de código com IA
+
+## KANBAN UTILZADO - TRELLO
+
+https://trello.com/b/v6qsRuO4/miniprojeto-skillmatch
 
 ## Marcelo Krauthein Corrêa
 
