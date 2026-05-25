@@ -494,4 +494,33 @@ async function iniciarSistema() {
   const vagasCarregadas = await buscarVagasSimuladas();
   console.log(`${vagasCarregadas.length} vagas carregadas!\n`);
 
-  
+  // RF08 - map gera todos os resultados
+  const resultados = gerarTodosResultados(candidato, vagasCarregadas);
+
+  // Exibe cada vaga no formato exigido pelo projeto
+  console.log("-".repeat(52));
+  console.log("  ANALISE POR VAGA");
+  console.log("-".repeat(52));
+
+  resultados.forEach(r => {
+    const numero = contarAnalise(); // RF13 - closure
+
+    console.log(`\nAnalise #${numero}`);
+    console.log(`Empresa: ${r.empresa}`);
+    console.log(`Cargo: ${r.cargo}`);
+    console.log(`Compatibilidade: ${r.percentual}%`);
+    console.log(`Habilidades encontradas: ${r.encontradas.join(", ")}`);
+
+    // RF05 - lista habilidades faltantes com for...of
+    listarHabilidadesFaltantes(r.empresa, r.faltantes);
+
+    console.log(`Classificacao: ${r.classificacao}`);
+
+    // RF04 - operador ternario
+    console.log(r.atendeTudo
+      ? "Status: Atende TODOS os requisitos!"
+      : "Status: Ainda nao atende todos os requisitos."
+    );
+
+    console.log("-".repeat(52));
+  });
