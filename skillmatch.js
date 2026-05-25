@@ -74,6 +74,7 @@
 // RF06  → encontrarMelhorVaga()
 // RF07  → gerarRecomendacao()
 // RF08  → gerarTodosResultados() com map, filter, find, every, reduce
+// RF11 - atributo exclusivo da classe filha
 // RF12  → finalizarAnalise() com callback
 // RF13  → criarContadorDeAnalises() com closure
 // RF14  → buscarVagasSimuladas() com Promise + iniciarSistema() com async/await
@@ -173,8 +174,9 @@ class VagaFrontEnd extends Vaga {
     super(empresa, cargo, requisitos, salario, modalidade);
 
  // ============================================================
-  // RF11 - atributo exclusivo da classe filha
-  // ============================================================
+ // RF11 - atributo exclusivo da classe filha
+ // ============================================================
+ 
     this.nivel = nivel;
   }
 
