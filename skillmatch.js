@@ -63,6 +63,21 @@
 // new VagaFrontEnd(...), a classe já existe na memória e 
 // funciona perfeitamente.
 
+// -- Indice: 
+// RF01  → objeto candidata
+// RF09  → class Vaga
+// RF10  → class VagaFrontEnd extends Vaga
+// RF02  → array de vagas
+// RF03  → calcularCompatibilidade()
+// RF04  → classificarCompatibilidade()
+// RF05  → listarHabilidadesFaltantes()
+// RF06  → encontrarMelhorVaga()
+// RF07  → gerarRecomendacao()
+// RF08  → gerarTodosResultados() com map, filter, find, every, reduce
+// RF12  → finalizarAnalise() com callback
+// RF13  → criarContadorDeAnalises() com closure
+// RF14  → buscarVagasSimuladas() com Promise + iniciarSistema() com async/await
+
 
 // ============================================================
 // RF01 - PERFIL DO CANDIDATO
