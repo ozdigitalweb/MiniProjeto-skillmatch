@@ -156,7 +156,10 @@ class VagaFrontEnd extends Vaga {
    */
   constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
     super(empresa, cargo, requisitos, salario, modalidade);
-    // RF11 - atributo exclusivo da classe filha
+
+ // ============================================================
+  // RF11 - atributo exclusivo da classe filha
+  // ============================================================
     this.nivel = nivel;
   }
 
@@ -327,7 +330,7 @@ const encontrarMelhorVaga = (resultados) =>
     atual.percentual > melhor.percentual ? atual : melhor
   );
 
-  
+
 // ============================================================
 // RF07 - GERAR RECOMENDACAO DE ESTUDO
 // ============================================================
@@ -389,3 +392,58 @@ const gerarTodosResultados = (candidato, vagas) => {
 
   return resultados;
 };
+
+
+// ============================================================
+// RF12 - CALLBACK
+// ============================================================
+
+/**
+ * Finaliza a analise executando uma funcao recebida como
+ * parametro (callback).
+ *
+ * CALLBACK: funcao passada como argumento para outra funcao.
+ * Quem chama decide o que acontece ao final.
+ *
+ * @param {string}   nomeCandidato
+ * @param {function} callback
+ */
+function finalizarAnalise(nomeCandidato, callback) {
+  console.log("\nAnalise encerrada pelo sistema.");
+  callback(nomeCandidato);
+}
+
+/**
+ * Mensagem final — passada como callback para finalizarAnalise.
+ * @param {string} nome
+ */
+function mensagemFinal(nome) {
+  console.log(`\n${nome}, seu diagnostico esta pronto!`);
+  console.log("Estude os conteudos recomendados e atualize seu GitHub.");
+  console.log("Candidate-se primeiro as vagas de Alta compatibilidade.");
+  console.log("\nBons estudos!");
+}
+
+
+// ============================================================
+// RF13 - CLOSURE
+// ============================================================
+
+/**
+ * Contador de analises usando CLOSURE.
+ *
+ * CLOSURE: funcao que "lembra" de variaveis do escopo externo.
+ * "total" fica protegido — so a funcao interna pode altera-lo.
+ *
+ * @returns {function(): number}
+ */
+function criarContadorDeAnalises() {
+  let total = 0; // variavel privada da closure
+
+  return function () {
+    total++;
+    return total;
+  };
+}
+
+const contarAnalise = criarContadorDeAnalises();
