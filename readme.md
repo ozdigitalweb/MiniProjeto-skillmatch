@@ -92,6 +92,10 @@ No projeto, a função `buscarVagasSimuladas()` imita esse comportamento usando 
 - **vscode-pdf** – visualiza arquivos PDF dentro do VS Code
 - **Codex (OpenAI)** – assistente de código com IA
 
+## KANBAN UTILZADO - TRELLO
+
+https://trello.com/b/v6qsRuO4/miniprojeto-skillmatch
+
 ## Marcelo Krauthein Corrêa
 
 Estudante de Programação Front-End React  
