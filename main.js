@@ -282,3 +282,48 @@ const classificarCompatibilidade = (percentual) => {
   else                       return "Baixa compatibilidade";
 };
 
+
+// ============================================================
+// RF05 - LISTAR HABILIDADES FALTANTES
+// ============================================================
+
+/**
+ * Exibe no console as habilidades que faltam para cada vaga.
+ *
+ * FOR...OF: percorre cada item do array automaticamente,
+ * sem precisar controlar um indice manualmente.
+ *
+ * @param {string}   nomeEmpresa
+ * @param {string[]} faltantes
+ */
+const listarHabilidadesFaltantes = (nomeEmpresa, faltantes) => {
+  if (faltantes.length === 0) {
+    console.log("Habilidades faltantes: nenhuma");
+    return;
+  }
+  // for...of: a variavel h recebe cada item do array a cada volta
+  const lista = [];
+  for (const h of faltantes) {
+    lista.push(h);
+  }
+  console.log(`Habilidades faltantes: ${lista.join(", ")}`);
+};
+
+
+// ============================================================
+// RF06 - ENCONTRAR A VAGA COM MAIOR COMPATIBILIDADE
+// ============================================================
+
+/**
+ * Retorna o resultado com maior percentual.
+ *
+ * RF08 - reduce: percorre o array acumulando um unico valor.
+ * OPERADOR TERNARIO: condicao ? valor_true : valor_false
+ *
+ * @param   {object[]} resultados
+ * @returns {object}
+ */
+const encontrarMelhorVaga = (resultados) =>
+  resultados.reduce((melhor, atual) =>
+    atual.percentual > melhor.percentual ? atual : melhor
+  );
